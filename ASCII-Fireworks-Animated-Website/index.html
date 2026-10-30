@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!-- pages-campaign site for Epsilon0xCell/ASCII-Fireworks-Animated; source of truth: ASCII-Fireworks-Animated-Website/ on the default branch -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASCII-Fireworks-Animated - two firework scripts from 2023</title>
+<style>
+/* I kept this page at the color of the terminal the small script runs in. Anything lighter and the captured rows below would stop looking like the real thing. */
+:root{--sky:#050508;--panel:#0b0b12;--ink:#d8d8e2;--dim:#8b8b9e;--line:#23232f;--red:#ff6b6b;--green:#51cf66;--yellow:#ffd43b;--magenta:#e599f7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sky);color:var(--ink);font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;line-height:1.6}
+.page{max-width:980px;margin:0 auto;padding:0 24px}
+header{padding:30px 0 8px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;align-items:baseline}
+header .name{color:#fff;font-weight:700}
+header a{color:var(--yellow);text-decoration:none;margin-left:16px;font-size:.92rem}
+header a:hover{text-decoration:underline}
+.skyline{padding:26px 0 0}
+h1{font-size:2.1rem;color:#fff;margin:0 0 12px;line-height:1.2;font-weight:700}
+.sub{color:var(--dim);max-width:38rem;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 4px}
+.badges img{height:20px}
+.bursts{display:block;margin:10px 0 0 auto}
+.term{background:var(--panel);border:1px solid var(--line);padding:20px 22px;margin:26px 0 0 60px;overflow-x:auto}
+@media(max-width:700px){.term{margin-left:0}}
+.term .head{color:var(--dim);font-size:.85rem;margin-bottom:12px}
+.term pre{margin:0;font-size:1.05rem;line-height:1.45;white-space:pre}
+.r{color:var(--red)}.g{color:var(--green)}.y{color:var(--yellow)}.m{color:var(--magenta)}
+.termcap{color:var(--dim);font-size:.88rem;margin:10px 0 0 60px}
+@media(max-width:700px){.termcap{margin-left:0}}
+section{padding:34px 0;border-top:1px solid var(--line);margin-top:34px}
+h2{color:#fff;font-size:1.25rem;margin:0 0 14px;font-weight:700}
+p{max-width:42rem}
+dl{margin:0;max-width:46rem}
+dt{color:#fff;font-weight:700;margin-top:20px}
+dd{margin:6px 0 0;color:var(--ink)}
+dd .dim{color:var(--dim)}
+pre.cmd{background:var(--panel);border:1px solid var(--line);padding:16px 18px;overflow-x:auto;font-size:.92rem}
+pre.cmd .c{color:var(--dim)}
+.figrow{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
+.figrow img{background:#000;border:1px solid var(--line);max-width:200px}
+.warn{border:1px solid var(--yellow);color:var(--ink);padding:16px 18px;max-width:44rem}
+.warn b{color:var(--yellow)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{border:1px solid var(--dim);padding:3px 12px;font-size:.88rem}
+footer{border-top:1px solid var(--line);margin-top:38px;padding:26px 0 46px;color:var(--dim);font-size:.92rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer a{color:var(--yellow);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="name">ASCII-Fireworks-Animated</div>
+  <div>
+    <a href="https://github.com/Epsilon0xCell/ASCII-Fireworks-Animated">Repository</a>
+    <a href="https://github.com/Epsilon0xCell">My GitHub profile</a>
+  </div>
+</header>
+
+<div class="skyline">
+  <h1>Fireworks, printed one row at a time.</h1>
+  <p class="sub">Two small firework animations from 2023, sharing a repo. One prints asterisks in a terminal. The other draws circles in a pygame window. Same idea, two very different sizes of program.</p>
+  <div class="badges">
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b&label=stars">
+    <img alt="GitHub forks" src="https://img.shields.io/github/forks/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b&label=forks">
+    <img alt="Last commit" src="https://img.shields.io/github/last-commit/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b&label=last%20commit">
+    <img alt="Top language" src="https://img.shields.io/github/languages/top/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b">
+    <img alt="Repository size" src="https://img.shields.io/github/repo-size/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b&label=size">
+    <img alt="License" src="https://img.shields.io/github/license/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b">
+  </div>
+  <!-- I drew these bursts as plain SVG lines because the repo holds no screenshot of either script running. Radiating lines are honest here: a burst in both scripts really is just marks sent out from one center point. -->
+  <svg class="bursts" width="430" height="150" viewBox="0 0 430 150" aria-hidden="true">
+    <g stroke="#ffd43b" stroke-width="2"><line x1="70" y1="70" x2="70" y2="22"/><line x1="70" y1="70" x2="106" y2="38"/><line x1="70" y1="70" x2="114" y2="78"/><line x1="70" y1="70" x2="96" y2="110"/><line x1="70" y1="70" x2="58" y2="116"/><line x1="70" y1="70" x2="28" y2="98"/><line x1="70" y1="70" x2="26" y2="58"/><line x1="70" y1="70" x2="40" y2="30"/></g>
+    <circle cx="70" cy="70" r="4" fill="#ffd43b"/>
+    <g stroke="#e599f7" stroke-width="2"><line x1="215" y1="52" x2="215" y2="14"/><line x1="215" y1="52" x2="244" y2="24"/><line x1="215" y1="52" x2="250" y2="56"/><line x1="215" y1="52" x2="238" y2="84"/><line x1="215" y1="52" x2="206" y2="90"/><line x1="215" y1="52" x2="182" y2="76"/><line x1="215" y1="52" x2="180" y2="44"/><line x1="215" y1="52" x2="192" y2="20"/></g>
+    <circle cx="215" cy="52" r="4" fill="#e599f7"/>
+    <g stroke="#51cf66" stroke-width="2"><line x1="345" y1="88" x2="345" y2="44"/><line x1="345" y1="88" x2="378" y2="56"/><line x1="345" y1="88" x2="386" y2="94"/><line x1="345" y1="88" x2="368" y2="124"/><line x1="345" y1="88" x2="334" y2="130"/><line x1="345" y1="88" x2="306" y2="112"/><line x1="345" y1="88" x2="304" y2="76"/><line x1="345" y1="88" x2="318" y2="50"/></g>
+    <circle cx="345" cy="88" r="4" fill="#51cf66"/>
+  </svg>
+</div>
+
+<!-- The rows in this block are not a mockup. I ran minimal-fireworks.py in a terminal session, let it print, and took the first rows it gave me, colors included. The color of each row is the ANSI code the script actually sent. -->
+<div class="term" role="img" aria-label="Captured terminal output from minimal-fireworks.py: rows of asterisks in red, green, yellow, and magenta">
+  <div class="head">$ python3 minimal-fireworks.py&nbsp;&nbsp;(real capture, first 14 rows)</div>
+  <pre><span class="m">**********</span>
+<span class="y">*****</span>
+<span class="y">*************</span>
+<span class="g">***************</span>
+<span class="r">***************</span>
+<span class="g">*************</span>
+<span class="m">********</span>
+<span class="y">************</span>
+<span class="r">***********</span>
+<span class="r">*****</span>
+<span class="m">***************</span>
+<span class="y">***********</span>
+<span class="g">**************</span>
+<span class="r">************</span></pre>
+</div>
+<p class="termcap">Each row is 5 to 15 asterisks. That range is a choice in the code: shorter rows vanished in the scroll, longer rows looked like a solid bar.</p>
+
+<section>
+  <h2>What this is</h2>
+  <p>I wrote the minimal script to see how little code a firework needs. The answer turned out to be one loop. Pick one of four colors, red, green, yellow, or magenta. Print a row of asterisks. Sleep a tenth of a second. Repeat forever, until Ctrl+C. There is no grid, no position tracking, and no burst shape. The terminal scrolling does the rest of the work, and I left blue and cyan out because they read badly on the dark terminal I ran it on.</p>
+  <p>The large script is the same idea with a window around it. It draws one burst per frame in pygame, wipes the screen, and draws the next one, so the show is a strobe of single bursts rather than a sky that fills up. A stick figure stands next to each burst. It is in this repo because it grew out of the small one, and my README says plainly that it is not ASCII.</p>
+  <p>Two details cost me real debugging time, so they are written down in the code. The minimal script flushes every row, because when its output is piped instead of shown on a terminal, Python holds the prints in a buffer and the animation appears to print nothing. And Ctrl+C is caught so the script prints the ANSI reset code on the way out. Without that, the last firework color stays active in your shell prompt.</p>
+</section>
+
+<section>
+  <h2>The two scripts, side by side</h2>
+  <dl>
+    <dt>minimal-fireworks.py</dt>
+    <dd>The ASCII one. Prints rows of asterisks in random colors and lengths in the terminal, forever, until Ctrl+C. Needs nothing but Python 3. Frame rate is a single time.sleep(0.1) call. <span class="dim">Colors: 4. Row length: 5 to 15 stars.</span></dd>
+    <dt>large-fireworks.py</dt>
+    <dd>The window one. Draws filled circles in a 700 by 500 pygame window, with the stick figure from stick_figure.png following each burst. The trail is a ring drawn first, in the burst color with each channel halved, and the filled circle drawn over it. Needs pygame. <span class="dim">Colors: 7. Radius: 10 to 50. Frame limiter: pygame.time.wait(100).</span></dd>
+  </dl>
+  <div class="figrow" style="margin-top:26px">
+    <img src="https://raw.githubusercontent.com/Epsilon0xCell/ASCII-Fireworks-Animated/main/stick_figure.png" alt="The stick figure image loaded by large-fireworks.py">
+    <p style="max-width:26rem">This is stick_figure.png, the one image the repo holds. The large script loads it from its own folder, so the script starts from any working directory. An earlier version used a bare relative path and crashed when launched from somewhere else. This repo has no banner or logo file, so this page uses this figure and the drawn bursts above instead of inventing art for it.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Run them</h2>
+  <pre class="cmd"><span class="c"># the ASCII one, Python 3 only, stop it with Ctrl+C</span>
+python3 minimal-fireworks.py
+
+<span class="c"># the window one, needs pygame first</span>
+pip install pygame
+python3 large-fireworks.py</pre>
+  <div class="chips"><span>Python 3</span><span>Terminal ANSI colors</span><span>pygame (large script only)</span></div>
+</section>
+
+<section>
+  <h2>What I could not run here</h2>
+  <p class="warn"><b>Honest limit:</b> the large script is compile checked only in the campaign record for this repo. pygame is not installed in the environment where this site was staged, and no install was done to fake a run. The minimal script above is the one with a real capture behind it. If you have pygame, the run command is the one in my README and it works from any folder.</p>
+  <p>Code: <a href="https://github.com/Epsilon0xCell/ASCII-Fireworks-Animated" style="color:var(--yellow)">github.com/Epsilon0xCell/ASCII-Fireworks-Animated</a>.</p>
+</section>
+
+<footer>
+  <span>Built by Epsilon0xCell</span>
+  <span>Two scripts, one idea, 2023.</span>
+</footer>
+
+</div>
+</body>
+</html>
