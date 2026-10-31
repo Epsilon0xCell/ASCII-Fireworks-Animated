@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<!-- pages-campaign site for Epsilon0xCell/ASCII-Fireworks-Animated; source of truth: ASCII-Fireworks-Animated-Website/ on the default branch -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASCII Fireworks Animated: The Night Sky Programme</title>
+<style>
+/* I set this page like a printed programme for one night outdoors: dark paper, warm ink, acts listed in order, and plates bound in after the text. I did not want it to look like a control room or a ticket stub, because nothing in these two scripts runs a system. They put on a show. */
+:root{
+  --night:#070912;
+  --night2:#0d1020;
+  --paper:#ece5d3;
+  --faded:#a49f8d;
+  --rule:#3a3d55;
+  --gold:#ffd43b;
+  --red:#ff6b6b;
+  --green:#51cf66;
+  --magenta:#e599f7;
+  --orange:#ffa94d;
+  --violet:#b197fc;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--paper);font-family:Georgia,"Times New Roman",Times,serif;line-height:1.65}
+a{color:var(--gold)}
+.masthead{max-width:1060px;margin:0 auto;padding:26px 24px 0;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:16px}
+.masthead .repo{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92rem;letter-spacing:.04em}
+.masthead nav a{margin-left:18px;text-decoration:none;font-size:.95rem}
+.masthead nav a:hover{text-decoration:underline}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+.cover{display:grid;grid-template-columns:120px 1fr;gap:28px;padding:38px 0 8px;align-items:start}
+@media(max-width:640px){.cover{grid-template-columns:1fr}.cover img.logo{width:84px}}
+.cover img.logo{width:120px;height:auto;display:block;border:1px solid var(--rule)}
+.eyebrow{font-family:ui-monospace,Menlo,Consolas,monospace;text-transform:uppercase;letter-spacing:.22em;font-size:.76rem;color:var(--orange);margin:0 0 14px}
+h1{font-size:2.7rem;line-height:1.12;font-weight:400;margin:0 0 16px;max-width:15em}
+@media(max-width:640px){h1{font-size:2rem}}
+.standfirst{font-size:1.12rem;max-width:38rem;margin:0;color:var(--paper)}
+.byline{color:var(--faded);font-style:italic;margin:14px 0 0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 6px}
+.badges img{height:20px}
+.banner{margin:26px 0 0}
+.banner img{width:100%;height:auto;display:block;border:1px solid var(--rule)}
+figcaption,.caption{color:var(--faded);font-size:.9rem;margin-top:8px;font-style:italic}
+figure{margin:0}
+/* I kept the sky in its own fenced plot of the page. No words sit on top of it, the way no words sit on top of a real sky. The words go before it and after it, in the programme. */
+.skywrap{margin:34px 0 0;border:1px solid var(--rule);background:var(--night2)}
+.sky{position:relative;height:440px;overflow:hidden}
+@media(max-width:640px){.sky{height:340px}}
+.sky canvas{position:absolute;inset:0;width:100%;height:100%;display:none}
+.sky.live canvas{display:block}
+.sky pre.still{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1rem;line-height:1.5;white-space:pre;text-align:center;padding:20px}
+.sky.live pre.still{display:none}
+.ground{position:absolute;left:0;right:0;bottom:54px;border-top:2px solid var(--paper)}
+.groundnote{position:absolute;left:0;right:0;bottom:0;height:54px;display:flex;align-items:center;padding:0 16px;color:var(--faded);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;border-top:1px solid var(--rule)}
+img.figure{position:absolute;bottom:55px;left:7%;height:118px;width:auto;display:block}
+@media(max-width:640px){img.figure{height:84px}}
+section{padding:40px 0 6px;border-top:1px solid var(--rule);margin-top:40px}
+section:first-of-type{border-top:none}
+h2{font-size:1.65rem;font-weight:400;margin:0 0 8px}
+h2 .no{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;color:var(--orange);letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:8px}
+p{max-width:42rem}
+.act{display:grid;grid-template-columns:86px 1fr;gap:24px;padding:26px 0;border-top:1px dotted var(--rule)}
+@media(max-width:640px){.act{grid-template-columns:1fr}}
+.act .actno{font-size:2.2rem;color:var(--gold);line-height:1}
+.act h3{margin:0 0 6px;font-size:1.3rem;font-weight:400}
+.act h3 code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.05rem;color:#fff}
+.facts{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.86rem;color:var(--faded);margin:10px 0}
+table.numbers{border-collapse:collapse;margin:14px 0;font-size:.95rem}
+table.numbers th,table.numbers td{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:7px 14px 7px 0;text-align:left;vertical-align:top}
+table.numbers th{color:var(--faded);font-weight:400;font-style:italic}
+pre.code,pre.cmd,pre.capture{background:#05060c;border:1px solid var(--rule);padding:16px 18px;overflow-x:auto;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88rem;line-height:1.55;max-width:46rem}
+pre.code .ln{color:#5b5f7a;display:inline-block;width:2.2em;text-align:right;margin-right:1.1em;user-select:none}
+pre.cmd{color:var(--paper)}
+pre.cmd .c{color:var(--faded)}
+.r{color:var(--red)}.g{color:var(--green)}.y{color:var(--gold)}.m{color:var(--magenta)}
+.plates{display:flex;flex-direction:column;gap:44px;margin-top:22px}
+.plates figure img{width:100%;height:auto;display:block;border:1px solid var(--rule);background:#fff}
+.plates figure:nth-child(even){margin-left:8%}
+.plates figure:nth-child(odd){margin-right:8%}
+@media(max-width:640px){.plates figure:nth-child(even),.plates figure:nth-child(odd){margin:0}}
+.plate-no{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange)}
+.notes{max-width:44rem}
+.notes li{margin-bottom:12px}
+ul{padding-left:1.2em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.chips span{border:1px solid var(--faded);padding:3px 12px;font-size:.88rem;font-family:ui-monospace,Menlo,Consolas,monospace}
+footer{border-top:1px solid var(--rule);margin-top:48px;padding:24px 0 48px;color:var(--faded);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.94rem}
+footer a{text-decoration:none}
+/* I let the sections arrive quietly as I scroll, in reading order, and nothing else. The sky is the only part of this page that is allowed to keep moving. */
+.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="repo">ASCII-Fireworks-Animated</div>
+  <nav>
+    <a href="https://github.com/Epsilon0xCell/ASCII-Fireworks-Animated">Repository</a>
+    <a href="https://github.com/Epsilon0xCell">My GitHub profile</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="cover">
+    <img class="logo" src="https://raw.githubusercontent.com/Epsilon0xCell/ASCII-Fireworks-Animated/main/logo.png" alt="Logo art for ASCII-Fireworks-Animated from the repo">
+    <div>
+      <p class="eyebrow">Programme for one night in 2023, kept running</p>
+      <h1>ASCII Fireworks Animated: The Night Sky Programme</h1>
+      <p class="standfirst">Two small firework programs share this repo. One prints rows of asterisks in a terminal. The other draws filled circles in a pygame window and puts a stick figure next to each burst. This page is the printed programme for that night: the sky first, then the two acts in order, then how to run them yourself.</p>
+      <p class="byline">I wrote both scripts in 2023. I have left what they do, and what they do not do, exactly as the code says it.</p>
+      <div class="badges">
+        <img alt="GitHub stars" src="https://img.shields.io/github/stars/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b&label=stars">
+        <img alt="GitHub forks" src="https://img.shields.io/github/forks/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b&label=forks">
+        <img alt="Last commit" src="https://img.shields.io/github/last-commit/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b&label=last%20commit">
+        <img alt="Top language" src="https://img.shields.io/github/languages/top/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b">
+        <img alt="Repository size" src="https://img.shields.io/github/repo-size/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b&label=size">
+        <img alt="License GPL-3.0" src="https://img.shields.io/github/license/Epsilon0xCell/ASCII-Fireworks-Animated?style=flat&color=ffd43b">
+      </div>
+    </div>
+  </div>
+
+  <figure class="banner">
+    <img src="https://raw.githubusercontent.com/Epsilon0xCell/ASCII-Fireworks-Animated/main/banner.png" alt="Banner art for ASCII-Fireworks-Animated from the repo">
+    <figcaption>Banner art from the repo root, banner.png. I use the art the repo already has. I did not make new art for this page.</figcaption>
+  </figure>
+
+  <!-- The burst in this pre block is decoration I wrote by hand for the no script version of the sky. It is not output from either script, and I do not claim it is. The live canvas, when script runs, replaces it. -->
+  <div class="skywrap" aria-label="The sky over the programme">
+    <div class="sky" id="sky">
+      <canvas id="skyCanvas" aria-hidden="true"></canvas>
+      <pre class="still" aria-hidden="true">          *   .   *
+      .  \  *  /  .
+        *  \|/  *
+    - - -  --*--  - - -
+        *  /|\  *
+      .  /  *  \  .
+          *   .   *</pre>
+      <div class="ground" aria-hidden="true"></div>
+      <img class="figure" src="https://raw.githubusercontent.com/Epsilon0xCell/ASCII-Fireworks-Animated/main/stick_figure.png" alt="The stick figure from stick_figure.png, standing on the ground line and watching the sky">
+      <div class="groundnote">Ground level. The figure stands here for the whole programme.</div>
+    </div>
+  </div>
+  <p class="caption">The sky above is a page version of the same idea, drawn here in the browser: rockets rise and burst into falling characters. It is not program output. The real shows are the two scripts below, one in a terminal and one in a pygame window. The figure on the ground line is stick_figure.png, the repo file the large script loads. In that script the figure appears up and to the left of each burst. On this page I stood it on the ground to watch, which is where a person at a fireworks night actually stands.</p>
+
+  <section class="reveal">
+    <h2><span class="no">Before the show</span>What this is</h2>
+    <p>I wrote the minimal script to find out how little code a firework needs. The answer was one loop. Pick one of four ANSI colors, red, green, yellow, or magenta. Print a row of 5 to 15 asterisks. Sleep for a tenth of a second. Do it again, forever, until Ctrl+C. There is no grid, no position tracking, and no burst shape in that file. The terminal scrolling does the rest of the work.</p>
+    <p>The large script is the same idea taken into a window. It is not ASCII, and my README says so plainly. It fills a 700 by 500 pygame window black, draws one filled circle with a darker ring around it, places the stick figure beside it, and then does the whole thing again. Nothing stays on screen between frames, so the show is a strobe of single bursts rather than a sky that fills up.</p>
+    <p>Order matters in this programme because the size jump is the story. Act One is 48 lines and needs nothing but Python 3. Act Two is 89 lines, needs pygame, and needs stick_figure.png sitting next to it. Everything after the acts is notes, plates, and the run commands.</p>
+  </section>
+
+  <section class="reveal">
+    <h2><span class="no">The programme</span>Two acts, in order</h2>
+
+    <div class="act">
+      <div class="actno">I.</div>
+      <div>
+        <h3>Act One: <code>minimal-fireworks.py</code></h3>
+        <p>The terminal act. Each call to firework() prints one row: a color code, then a run of asterisks. I left blue and cyan out on purpose, because on the dark terminal I ran this on, red, green, yellow, and magenta read clearly. I picked 5 to 15 stars because shorter rows vanished in the scroll and longer rows looked like a solid bar.</p>
+        <table class="numbers">
+          <tr><th>Colors</th><td>4 ANSI codes, lines 11: 31 red, 32 green, 33 yellow, 35 magenta</td></tr>
+          <tr><th>Row</th><td>5 to 15 asterisks, line 28</td></tr>
+          <tr><th>Timing</th><td>time.sleep(0.1) after each row, line 38</td></tr>
+          <tr><th>Screen</th><td>No clearing, no cursor work. Rows print and the terminal scrolls.</td></tr>
+          <tr><th>Ending</th><td>Ctrl+C is caught. The script prints the reset code once, then returns.</td></tr>
+        </table>
+        <p class="facts">Excerpt from minimal-fireworks.py, lines 31 to 44, at the head this page was built from.</p>
+        <pre class="code"><span class="ln">31</span>def main():
+<span class="ln">32</span>    try:
+<span class="ln">33</span>        while True:
+<span class="ln">34</span>            firework()
+<span class="ln">35</span>            # This sleep is the frame rate. Without it the loop prints as
+<span class="ln">36</span>            # fast as Python can, the terminal scrolls past too quickly to
+<span class="ln">37</span>            # read as fireworks, and one core stays pinned.
+<span class="ln">38</span>            time.sleep(0.1)
+<span class="ln">39</span>    except KeyboardInterrupt:
+<span class="ln">40</span>        # I catch Ctrl+C here instead of letting the traceback out. Leave
+<span class="ln">41</span>        # the terminal the way it was found: without the reset code the
+<span class="ln">42</span>        # last firework's color stays active in the user's prompt.
+<span class="ln">43</span>        print(RESET)
+<span class="ln">44</span>        return</pre>
+      </div>
+    </div>
+
+    <div class="act">
+      <div class="actno">II.</div>
+      <div>
+        <h3>Act Two: <code>large-fireworks.py</code></h3>
+        <p>The window act. Each frame picks a center at least 50 pixels from the edge, a color from a list of seven, and a radius from 10 to 50. The trail is not a streak. It is a ring drawn first, in the same color with each channel halved, and the bright filled circle is drawn over it, so what you see is a dark band around a bright disc.</p>
+        <table class="numbers">
+          <tr><th>Window</th><td>700 by 500, SIZE on line 12, caption set to Fireworks</td></tr>
+          <tr><th>Colors</th><td>7 RGB colors, lines 13 to 14: red, orange, yellow, green, blue, indigo, violet</td></tr>
+          <tr><th>Burst</th><td>Center x 50 to 650, y 50 to 450. Radius 10 to 50. Ring width 5 to 15.</td></tr>
+          <tr><th>Timing</th><td>pygame.time.wait(100) at the end of each frame, line 83. There is no clock object.</td></tr>
+          <tr><th>Screen</th><td>The window is filled black at the start of each frame, line 50. One burst per frame, nothing kept.</td></tr>
+          <tr><th>Figure</th><td>stick_figure.png, loaded from the folder the script sits in, placed up and to the left of the burst center.</td></tr>
+        </table>
+        <p class="facts">Excerpt from large-fireworks.py, lines 58 to 67, at the head this page was built from.</p>
+        <pre class="code"><span class="ln">58</span>        x = random.randint(50, 650)
+<span class="ln">59</span>        y = random.randint(50, 450)
+<span class="ln">60</span>        color = random.choice(COLORS)
+<span class="ln">61</span>        radius = random.randint(10, 50)
+<span class="ln">62</span>        # I halve each channel to keep the trail the same hue as its
+<span class="ln">63</span>        # burst. Integer division rounds down, so odd values lose a step.
+<span class="ln">64</span>        # I do not mind, because the trail only needs to read as darker.
+<span class="ln">65</span>        trail_color = (color[0] // 2, color[1] // 2, color[2] // 2)
+<span class="ln">66</span>        trail_length = random.randint(5, 15)
+<span class="ln">67</span>        draw_firework(screen, x, y, color, radius, trail_color, trail_length)</pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <h2><span class="no">From a real run</span>Fourteen rows, captured</h2>
+    <p>I ran minimal-fireworks.py for two seconds on 31 October 2026 and kept the output. The rows below are the first 14 rows of that run. The ANSI escape codes were stripped to make the rows plain text, and the color on each row here is the color that row arrived with: 31 red, 32 green, 33 yellow, 35 magenta. Two seconds gave 20 rows, which fits the tenth of a second sleep in the code.</p>
+    <pre class="capture"><span class="y">************</span>
+<span class="g">******</span>
+<span class="g">************</span>
+<span class="g">***************</span>
+<span class="y">************</span>
+<span class="y">************</span>
+<span class="r">*******</span>
+<span class="r">******</span>
+<span class="g">********</span>
+<span class="m">*******</span>
+<span class="g">*******</span>
+<span class="r">*************</span>
+<span class="r">*************</span>
+<span class="r">*******</span></pre>
+    <p class="caption">One frame is not a fair phrase for this script, because it has no frames drawn as pictures. It has rows, and these are real rows. The page sky at the top is not this, and I have labeled it as a page version for that reason.</p>
+  </section>
+
+  <section class="reveal">
+    <h2><span class="no">Run it yourself</span>How to run them</h2>
+    <pre class="cmd"><span class="c"># Act One: Python 3 only. Stop it with Ctrl+C.</span>
+python3 minimal-fireworks.py
+
+<span class="c"># Act Two: install pygame first, then run it from any folder.</span>
+pip install pygame
+python3 large-fireworks.py</pre>
+    <div class="chips"><span>Python 3</span><span>ANSI color codes</span><span>pygame, Act Two only</span><span>GPL-3.0</span></div>
+    <p>Code: <a href="https://github.com/Epsilon0xCell/ASCII-Fireworks-Animated">github.com/Epsilon0xCell/ASCII-Fireworks-Animated</a></p>
+  </section>
+
+  <section class="reveal">
+    <h2><span class="no">Honest notes</span>What the code does not hide</h2>
+    <ul class="notes">
+      <li>These are 2023 scripts and they read like 2023 scripts. Small, direct, and not built to handle cases they never met.</li>
+      <li>The minimal script never clears the screen and never looks at the terminal size. A narrow terminal and a wide one get the same 5 to 15 asterisks per row. The scroll is the whole stage.</li>
+      <li>The large script does not clear a terminal either. It fills its own window black each frame. If stick_figure.png is missing, it stops at load time with an error that names the file. I left that in, because the scene has nothing to show without the figure.</li>
+      <li>The large script waits 100 milliseconds with no clock object, and that wait also sets how often it checks for a close click. The window can take a beat to notice. That is in the code comments because it cost me time to understand.</li>
+      <li>Near the top or left edge, the figure offset can push part of the figure off the window. Pygame clips it and the next frame moves on. I did not fix that, and this page does not pretend I did.</li>
+      <li>The GitHub description for this repo still says fireforks. I know. I left the description as it stands in the record, and this page spells the word right.</li>
+    </ul>
+  </section>
+
+  <section class="reveal">
+    <h2><span class="no">Printed plates</span>Plates bound into the programme</h2>
+    <p>These six plates come from ASCII-Fireworks-Animated-Visuals in the repo. I print them here as plates, in file order, with captions that say what each sheet is called in the repo. I did not redraw them for this page.</p>
+    <div class="plates">
+      <figure>
+        <div class="plate-no">Plate I</div>
+        <img src="https://raw.githubusercontent.com/Epsilon0xCell/ASCII-Fireworks-Animated/main/ASCII-Fireworks-Animated-Visuals/architecture.png" alt="Architecture sheet from the repo visuals folder">
+        <figcaption>architecture.png, the architecture sheet in ASCII-Fireworks-Animated-Visuals.</figcaption>
+      </figure>
+      <figure>
+        <div class="plate-no">Plate II</div>
+        <img src="https://raw.githubusercontent.com/Epsilon0xCell/ASCII-Fireworks-Animated/main/ASCII-Fireworks-Animated-Visuals/data-flow.png" alt="Data flow sheet from the repo visuals folder">
+        <figcaption>data-flow.png, the data flow sheet in ASCII-Fireworks-Animated-Visuals.</figcaption>
+      </figure>
+      <figure>
+        <div class="plate-no">Plate III</div>
+        <img src="https://raw.githubusercontent.com/Epsilon0xCell/ASCII-Fireworks-Animated/main/ASCII-Fireworks-Animated-Visuals/flowchart.png" alt="Flowchart sheet from the repo visuals folder">
+        <figcaption>flowchart.png, the flowchart sheet in ASCII-Fireworks-Animated-Visuals.</figcaption>
+      </figure>
+      <figure>
+        <div class="plate-no">Plate IV</div>
+        <img src="https://raw.githubusercontent.com/Epsilon0xCell/ASCII-Fireworks-Animated/main/ASCII-Fireworks-Animated-Visuals/product-map.png" alt="Product map sheet from the repo visuals folder">
+        <figcaption>product-map.png, the product map sheet in ASCII-Fireworks-Animated-Visuals.</figcaption>
+      </figure>
+      <figure>
+        <div class="plate-no">Plate V</div>
+        <img src="https://raw.githubusercontent.com/Epsilon0xCell/ASCII-Fireworks-Animated/main/ASCII-Fireworks-Animated-Visuals/schematic.png" alt="Schematic sheet from the repo visuals folder">
+        <figcaption>schematic.png, the schematic sheet in ASCII-Fireworks-Animated-Visuals.</figcaption>
+      </figure>
+      <figure>
+        <div class="plate-no">Plate VI</div>
+        <img src="https://raw.githubusercontent.com/Epsilon0xCell/ASCII-Fireworks-Animated/main/ASCII-Fireworks-Animated-Visuals/statistics.png" alt="Statistics sheet from the repo visuals folder">
+        <figcaption>statistics.png, the statistics sheet in ASCII-Fireworks-Animated-Visuals.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <footer>
+    <span>Built by Epsilon0xCell</span>
+    <span><a href="https://github.com/Epsilon0xCell/ASCII-Fireworks-Animated">Repository</a> &nbsp; <a href="https://github.com/Epsilon0xCell">github.com/Epsilon0xCell</a></span>
+    <span>Two scripts, one idea, 2023.</span>
+  </footer>
+</div>
+
+<script>
+// I wrote this sky for the page only. It borrows the idea, characters falling after a burst, and none of the code, because the scripts themselves do not draw anything like this. The minimal one prints rows and the large one draws circles.
+(function () {
+  document.documentElement.classList.add("js");
+  var sky = document.getElementById("sky");
+  var canvas = document.getElementById("skyCanvas");
+  if (!sky || !canvas || !canvas.getContext) { return; }
+  var ctx = canvas.getContext("2d");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var colors = ["#ffd43b", "#ff6b6b", "#51cf66", "#e599f7", "#ffa94d", "#b197fc"];
+  var chars = ["*", "*", "+", ".", "x"];
+  var stars = [];
+  var rockets = [];
+  var sparks = [];
+  var raf = null;
+  var last = 0;
+  var lastLaunch = 0;
+
+  function sizeCanvas() {
+    canvas.width = sky.clientWidth;
+    canvas.height = sky.clientHeight;
+    stars = [];
+    for (var i = 0; i < 70; i++) {
+      stars.push({ x: Math.random() * canvas.width, y: Math.random() * (canvas.height - 70), r: Math.random() * 1.4 + 0.3 });
+    }
+  }
+
+  function drawStars() {
+    ctx.fillStyle = "#d9d4c3";
+    for (var i = 0; i < stars.length; i++) {
+      ctx.globalAlpha = 0.55;
+      ctx.fillRect(stars[i].x, stars[i].y, stars[i].r, stars[i].r);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function burst(x, y, color) {
+    for (var i = 0; i < 30; i++) {
+      var a = (Math.PI * 2 * i) / 30 + Math.random() * 0.2;
+      var sp = 1.2 + Math.random() * 2.4;
+      sparks.push({ x: x, y: y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 46 + Math.random() * 22, age: 0, color: color, ch: chars[Math.floor(Math.random() * chars.length)] });
+    }
+  }
+
+  // I draw one still burst when the visitor asked for less motion. One frame, drawn once, and the figure on the ground line stays as it is in the markup.
+  function drawStill() {
+    ctx.fillStyle = "#0d1020";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    drawStars();
+    var cx = canvas.width * 0.58;
+    var cy = canvas.height * 0.36;
+    ctx.font = "18px ui-monospace, Menlo, Consolas, monospace";
+    ctx.textAlign = "center";
+    for (var i = 0; i < 16; i++) {
+      var a = (Math.PI * 2 * i) / 16;
+      ctx.fillStyle = colors[i % colors.length];
+      ctx.fillText("*", cx + Math.cos(a) * 62, cy + Math.sin(a) * 62);
+      ctx.fillText(".", cx + Math.cos(a) * 34, cy + Math.sin(a) * 34);
+    }
+    ctx.fillStyle = "#ffd43b";
+    ctx.fillText("*", cx, cy);
+  }
+
+  function frame(now) {
+    raf = requestAnimationFrame(frame);
+    if (now - last < 40) { return; }
+    var dt = Math.min(2, (now - last) / 40 || 1);
+    last = now;
+    ctx.fillStyle = "#0d1020";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    drawStars();
+    ctx.font = "16px ui-monospace, Menlo, Consolas, monospace";
+    ctx.textAlign = "center";
+    if (now - lastLaunch > 950 && rockets.length < 2) {
+      lastLaunch = now;
+      rockets.push({ x: canvas.width * (0.25 + Math.random() * 0.55), y: canvas.height - 58, vy: -(5 + Math.random() * 2), top: 60 + Math.random() * 130, color: colors[Math.floor(Math.random() * colors.length)] });
+    }
+    for (var i = rockets.length - 1; i >= 0; i--) {
+      var r = rockets[i];
+      r.y += r.vy * dt;
+      ctx.fillStyle = r.color;
+      ctx.fillText("|", r.x, r.y + 14);
+      ctx.fillText("*", r.x, r.y);
+      if (r.y <= r.top) { burst(r.x, r.y, r.color); rockets.splice(i, 1); }
+    }
+    for (var j = sparks.length - 1; j >= 0; j--) {
+      var s = sparks[j];
+      s.age += dt;
+      s.x += s.vx * dt;
+      s.y += s.vy * dt;
+      s.vy += 0.045 * dt;
+      ctx.globalAlpha = Math.max(0, 1 - s.age / s.life);
+      ctx.fillStyle = s.color;
+      ctx.fillText(s.ch, s.x, s.y);
+      if (s.age >= s.life) { sparks.splice(j, 1); }
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  sizeCanvas();
+  sky.classList.add("live");
+  if (reduce) {
+    drawStill();
+  } else {
+    raf = requestAnimationFrame(frame);
+  }
+  window.addEventListener("resize", function () {
+    sizeCanvas();
+    if (reduce) { drawStill(); }
+  });
+  // I stop the loop when the tab is hidden. A fireworks sky nobody is watching does not need to keep spending frames.
+  document.addEventListener("visibilitychange", function () {
+    if (reduce) { return; }
+    if (document.hidden) {
+      if (raf) { cancelAnimationFrame(raf); raf = null; }
+    } else if (!raf) {
+      last = 0;
+      raf = requestAnimationFrame(frame);
+    }
+  });
+
+  // I reveal each part of the programme as it arrives on screen, in the order I printed it. If this observer is missing, I show everything at once rather than leave a section blank.
+  var parts = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    for (var k = 0; k < parts.length; k++) { parts[k].classList.add("in"); }
+    return;
+  }
+  var watcher = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) { entry.target.classList.add("in"); watcher.unobserve(entry.target); }
+    });
+  }, { threshold: 0.08 });
+  parts.forEach(function (part) { watcher.observe(part); });
+})();
+</script>
+</body>
+</html>
