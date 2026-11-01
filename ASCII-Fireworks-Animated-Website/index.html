@@ -1,102 +1,38 @@
 <!DOCTYPE html>
-<!-- pages-campaign site for Epsilon0xCell/ASCII-Fireworks-Animated; source of truth: ASCII-Fireworks-Animated-Website/ on the default branch -->
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ASCII Fireworks Animated: The Night Sky Programme</title>
-<style>
-/* I set this page like a printed programme for one night outdoors: dark paper, warm ink, acts listed in order, and plates bound in after the text. I did not want it to look like a control room or a ticket stub, because nothing in these two scripts runs a system. They put on a show. */
-:root{
-  --night:#070912;
-  --night2:#0d1020;
-  --paper:#ece5d3;
-  --faded:#a49f8d;
-  --rule:#3a3d55;
-  --gold:#ffd43b;
-  --red:#ff6b6b;
-  --green:#51cf66;
-  --magenta:#e599f7;
-  --orange:#ffa94d;
-  --violet:#b197fc;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--night);color:var(--paper);font-family:Georgia,"Times New Roman",Times,serif;line-height:1.65}
-a{color:var(--gold)}
-.masthead{max-width:1060px;margin:0 auto;padding:26px 24px 0;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:16px}
-.masthead .repo{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92rem;letter-spacing:.04em}
-.masthead nav a{margin-left:18px;text-decoration:none;font-size:.95rem}
-.masthead nav a:hover{text-decoration:underline}
-.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
-.cover{display:grid;grid-template-columns:120px 1fr;gap:28px;padding:38px 0 8px;align-items:start}
-@media(max-width:640px){.cover{grid-template-columns:1fr}.cover img.logo{width:84px}}
-.cover img.logo{width:120px;height:auto;display:block;border:1px solid var(--rule)}
-.eyebrow{font-family:ui-monospace,Menlo,Consolas,monospace;text-transform:uppercase;letter-spacing:.22em;font-size:.76rem;color:var(--orange);margin:0 0 14px}
-h1{font-size:2.7rem;line-height:1.12;font-weight:400;margin:0 0 16px;max-width:15em}
-@media(max-width:640px){h1{font-size:2rem}}
-.standfirst{font-size:1.12rem;max-width:38rem;margin:0;color:var(--paper)}
-.byline{color:var(--faded);font-style:italic;margin:14px 0 0}
-.badges{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 6px}
-.badges img{height:20px}
-.banner{margin:26px 0 0}
-.banner img{width:100%;height:auto;display:block;border:1px solid var(--rule)}
-figcaption,.caption{color:var(--faded);font-size:.9rem;margin-top:8px;font-style:italic}
-figure{margin:0}
-/* I kept the sky in its own fenced plot of the page. No words sit on top of it, the way no words sit on top of a real sky. The words go before it and after it, in the programme. */
-.skywrap{margin:34px 0 0;border:1px solid var(--rule);background:var(--night2)}
-.sky{position:relative;height:440px;overflow:hidden}
-@media(max-width:640px){.sky{height:340px}}
-.sky canvas{position:absolute;inset:0;width:100%;height:100%;display:none}
-.sky.live canvas{display:block}
-.sky pre.still{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1rem;line-height:1.5;white-space:pre;text-align:center;padding:20px}
-.sky.live pre.still{display:none}
-.ground{position:absolute;left:0;right:0;bottom:54px;border-top:2px solid var(--paper)}
-.groundnote{position:absolute;left:0;right:0;bottom:0;height:54px;display:flex;align-items:center;padding:0 16px;color:var(--faded);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;border-top:1px solid var(--rule)}
-img.figure{position:absolute;bottom:55px;left:7%;height:118px;width:auto;display:block}
-@media(max-width:640px){img.figure{height:84px}}
-section{padding:40px 0 6px;border-top:1px solid var(--rule);margin-top:40px}
-section:first-of-type{border-top:none}
-h2{font-size:1.65rem;font-weight:400;margin:0 0 8px}
-h2 .no{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;color:var(--orange);letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:8px}
-p{max-width:42rem}
-.act{display:grid;grid-template-columns:86px 1fr;gap:24px;padding:26px 0;border-top:1px dotted var(--rule)}
-@media(max-width:640px){.act{grid-template-columns:1fr}}
-.act .actno{font-size:2.2rem;color:var(--gold);line-height:1}
-.act h3{margin:0 0 6px;font-size:1.3rem;font-weight:400}
-.act h3 code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.05rem;color:#fff}
-.facts{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.86rem;color:var(--faded);margin:10px 0}
-table.numbers{border-collapse:collapse;margin:14px 0;font-size:.95rem}
-table.numbers th,table.numbers td{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:7px 14px 7px 0;text-align:left;vertical-align:top}
-table.numbers th{color:var(--faded);font-weight:400;font-style:italic}
-pre.code,pre.cmd,pre.capture{background:#05060c;border:1px solid var(--rule);padding:16px 18px;overflow-x:auto;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88rem;line-height:1.55;max-width:46rem}
-pre.code .ln{color:#5b5f7a;display:inline-block;width:2.2em;text-align:right;margin-right:1.1em;user-select:none}
-pre.cmd{color:var(--paper)}
-pre.cmd .c{color:var(--faded)}
-.r{color:var(--red)}.g{color:var(--green)}.y{color:var(--gold)}.m{color:var(--magenta)}
-.plates{display:flex;flex-direction:column;gap:44px;margin-top:22px}
-.plates figure img{width:100%;height:auto;display:block;border:1px solid var(--rule);background:#fff}
-.plates figure:nth-child(even){margin-left:8%}
-.plates figure:nth-child(odd){margin-right:8%}
-@media(max-width:640px){.plates figure:nth-child(even),.plates figure:nth-child(odd){margin:0}}
-.plate-no{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange)}
-.notes{max-width:44rem}
-.notes li{margin-bottom:12px}
-ul{padding-left:1.2em}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
-.chips span{border:1px solid var(--faded);padding:3px 12px;font-size:.88rem;font-family:ui-monospace,Menlo,Consolas,monospace}
-footer{border-top:1px solid var(--rule);margin-top:48px;padding:24px 0 48px;color:var(--faded);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.94rem}
-footer a{text-decoration:none}
-/* I let the sections arrive quietly as I scroll, in reading order, and nothing else. The sky is the only part of this page that is allowed to keep moving. */
-.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
-.js .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
-  .js .reveal{opacity:1;transform:none;transition:none}
-}
-</style>
-</head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ASCII Fireworks Animated: The Night Sky Programme</title><style>@font-face{font-family:'Dawning of a New Day';src:url('fonts/Dawning.ttf') format('truetype');font-weight:normal;font-display:swap}@font-face{font-family:'Barlow';src:url('fonts/Barlow.ttf') format('truetype');font-weight:normal;font-display:swap}
+:root{--pine:#0e2a22;--red:#9e222c;--gold:#e8ae4a;--snow:#f2f0e8}
+*{box-sizing:border-box}body{margin:0;background:var(--pine);color:#22302a;font-family:'Barlow',sans-serif;line-height:1.62}
+h1,h2,h3{font-family:'Dawning of a New Day',cursive;color:var(--red);position:relative;padding-left:26px}
+h1::before,h2::before,h3::before{content:'';position:absolute;left:2px;top:-8px;width:14px;height:14px;border-top:2px solid var(--gold);border-left:2px solid var(--gold);transform:rotate(24deg)}
+main.programme{max-width:1020px;margin:0 auto;padding:30px 18px 60px}
+section,article{background:var(--snow);border:2px solid var(--red);border-radius:3px;padding:22px 26px;margin:28px 0;box-shadow:0 0 0 6px rgba(232,174,74,.14)}
+pre,code{background:#12291f;color:var(--snow);border-radius:3px}
+pre{padding:16px;border:1px solid var(--gold);overflow:auto}
+a{color:var(--red)}a::before{content:'\1F3EE '}
+a:hover{text-shadow:0 0 9px rgba(232,174,74,.8);text-decoration-color:var(--gold)}
+a:visited::before{content:'\1F3EE ';opacity:.45}
+img{max-width:100%}
+.cover{text-align:center;background:var(--pine);border:none;box-shadow:none;color:var(--snow)}
+.cover h1{color:var(--gold);font-size:2.6rem}
+.cover img{border:4px solid var(--gold);border-radius:3px}
+a.btn,button{background:#5a141c;color:var(--snow);border:1px solid var(--gold);border-radius:44% 56% 52% 48%/62% 60% 40% 38%;font-family:'Dawning of a New Day',cursive;font-size:1.25rem;padding:.4em 1.3em}
+a.btn::before{content:''}
+a.btn:hover,button:hover{box-shadow:0 0 0 3px rgba(232,174,74,.35),0 0 18px rgba(232,174,74,.55)}
+a.btn:active,button:active{box-shadow:0 0 0 6px rgba(232,174,74,.5)}
+.groundline{border-top:3px solid var(--gold);text-align:center;color:var(--snow);padding-top:6px;background:var(--pine)}
+.sheaf{text-align:center;color:var(--gold);letter-spacing:.5em;background:var(--pine);padding:4px}
+footer{background:var(--pine);color:var(--snow);text-align:center;padding:24px 16px}
+footer a{color:var(--gold)}
+</style></head>
 <body>
+<main class="programme">
+<section class="cover"><img src="themed-intro.png" alt="A tiered ofrenda by candlelight, marigold petals rising off the path to the photographs">
+<h1>ASCII Fireworks Animated: The Night the Table Is Set Again</h1>
+<p>A printed programme for one evening in 2023, handed to guests at the door and read by candlelight.</p></section>
+<p class="groundline">Ground level. The figure stands here for the whole programme.</p>
+<div class="sheaf" aria-hidden="true">&#10038; &#10038; &#10038; &#10038;</div>
+
 <header class="masthead">
   <div class="repo">ASCII-Fireworks-Animated</div>
   <nav>
@@ -303,6 +239,8 @@ python3 large-fireworks.py</pre>
   </footer>
 </div>
 
+
+</main><footer><p>Two scripts, one idea, 2023.</p><p><a href="https://github.com/Epsilon0xCell/ASCII-Fireworks-Animated">Repository</a> &nbsp; <a href="https://github.com/Epsilon0xCell">My GitHub profile</a></p></footer>
 <script>
 // I wrote this sky for the page only. It borrows the idea, characters falling after a burst, and none of the code, because the scripts themselves do not draw anything like this. The minimal one prints rows and the large one draws circles.
 (function () {
@@ -438,5 +376,4 @@ python3 large-fireworks.py</pre>
   parts.forEach(function (part) { watcher.observe(part); });
 })();
 </script>
-</body>
-</html>
+</body></html>

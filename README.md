@@ -1,3 +1,5 @@
+![Introduction banner](intro-banner.png)
+
 # ASCII-Fireworks-Animated
 
 Two small firework animations from 2023, sharing a repo:
@@ -20,3 +22,9 @@ Two small firework animations from 2023, sharing a repo:
   pip install pygame
   python3 large-fireworks.py
   ```
+
+![Wordmark banner](banner.png)
+
+<img src="assets-scene.svg" alt="Animated themed scene" width="100%">
+
+> Ofrenda label, taped before a photograph: two scripts, one idea, 2023. The visit below moves tier by tier.
